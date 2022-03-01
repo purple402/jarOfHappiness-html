@@ -1,0 +1,22 @@
+{
+  "name": "jarofhappiness",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/purple402/jarOfHappiness.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/purple402/jarOfHappiness/issues"
+  },
+  "homepage": "https://github.com/purple402/jarOfHappiness#readme",
+  "dependencies": {
+    "firebase": "^9.6.7"
+  }
+}
