@@ -4,6 +4,7 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   updateProfile,
+  signOut
 } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-auth.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore.js";
 
@@ -46,5 +47,22 @@ const signUp = async (email, password, username) => {
     console.log("signUp", error.code, error.message);
   }
 };
+
+const checkCurrentUser = async () => {
+  const user = auth.currentUser;
+  if (user) {
+    return user;
+  } else {
+    return null;
+  }
+};
+
+const signOutAccount = async () => {
+  try {
+    signOut(auth);
+  } catch (error) {
+    console.log("signOut", error.message);
+  }
+}
 
 export { signIn, signUp, checkCurrentUser, signOutAccount };
