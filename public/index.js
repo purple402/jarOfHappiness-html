@@ -1,18 +1,20 @@
-const title = document.querySelector("h1");
+import {
+  signIn,
+} from "./firebase.js";
 
-title.style.color = "crimson";
+const loginDiv = document.querySelector("#login_div");
 
-import { signIn } from "./firebase.js";
-
-const loginForm = document.querySelector("form");
-
-const submit = async (e) => {
+// log-in
+const logIn = async (e) => {
   e.preventDefault();
   const userId = e.target[0].value;
   const userPassword = e.target[1].value;
-  signIn(userId, userPassword).then((user) => {
-    console.log("index", user)
-  });
-  
+  const user = await signIn(userId, userPassword);
+  console.log("index logIn", user);
 };
-loginForm.addEventListener("submit", (e) => submit(e));
+loginForm.addEventListener("submit", (e) => logIn(e));
+
+  e.preventDefault();
+  const userId = e.target[0].value;
+  const userPassword = e.target[1].value;
+};
