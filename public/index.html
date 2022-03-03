@@ -33,6 +33,26 @@
         <button class="btn-open-popup">SIGN-UP</button>
       </div>
 
+      <div class="modal" method="post">
+        <div class="modal_body">
+          <h2>회원가입</h2>
+          <form id="join_form">
+            <label for="join_id">ID :</label>
+            <input type="email" id="join_id" name="join_id" required />
+            <label for="password">password :</label>
+            <input
+              type="password"
+              id="join_password"
+              name="join_password"
+              required
+            />
+            <label for="join_username">username :</label>
+            <input id="join_username" name="join_username" required />
+            <button id="join_btn">SIGN-UP</button>
+          </form>
+        </div>
+      </div>
+    </div>
 
     <!-- firebase -->
     <script defer src="/__/firebase/9.6.7/firebase-app-compat.js"></script>

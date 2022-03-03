@@ -2,6 +2,8 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.7/firebase
 import {
   getAuth,
   signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  updateProfile,
 } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-auth.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore.js";
 
@@ -26,6 +28,22 @@ const signIn = async (email, password) => {
     return user;
   } catch (error) {
     console.log("firebase signIn", error.code, error.message);
+  }
+};
+
+const signUp = async (email, password, username) => {
+  try {
+    const { user } = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    updateProfile(user, {
+      displayName: username,
+    });
+    return user;
+  } catch (error) {
+    console.log("signUp", error.code, error.message);
   }
 };
 
