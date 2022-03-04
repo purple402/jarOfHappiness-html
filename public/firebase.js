@@ -22,6 +22,7 @@ const firebaseApp = initializeApp(firebaseConfig);
 const auth = getAuth();
 const db = getFirestore();
 
+// 로그인 기능
 const signIn = async (email, password) => {
   try {
     const { user } = await signInWithEmailAndPassword(auth, email, password);
@@ -32,6 +33,7 @@ const signIn = async (email, password) => {
   }
 };
 
+// 회원가입 기능
 const signUp = async (email, password, username) => {
   try {
     const { user } = await createUserWithEmailAndPassword(
@@ -48,6 +50,7 @@ const signUp = async (email, password, username) => {
   }
 };
 
+// 로그인 여부 확인
 const checkCurrentUser = async () => {
   const user = auth.currentUser;
   if (user) {
@@ -57,12 +60,13 @@ const checkCurrentUser = async () => {
   }
 };
 
-const signOutAccount = async () => {
+// 로그아웃 기능
+const LogOut = async () => {
   try {
     signOut(auth);
   } catch (error) {
-    console.log("signOut", error.message);
+    console.log( "LogOut", error.message);
   }
 }
 
-export { signIn, signUp, checkCurrentUser, signOutAccount };
+export { signIn, signUp, checkCurrentUser, LogOut };

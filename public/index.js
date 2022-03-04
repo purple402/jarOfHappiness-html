@@ -2,7 +2,7 @@ import {
   signIn,
   signUp,
   checkCurrentUser,
-  signOutAccount,
+  LogOut,
 } from "./firebase.js";
 
 const body = document.querySelector("body");
@@ -13,18 +13,18 @@ const joinForm = document.querySelector("#join_form");
 const modal = document.querySelector(".modal");
 const btnOpenPopup = document.querySelector(".btn-open-popup");
 
-// log-in
-const logIn = async (e) => {
+// 로그인
+const logInAccount = async (e) => {
   e.preventDefault();
   const userId = e.target[0].value;
   const userPassword = e.target[1].value;
   const user = await signIn(userId, userPassword);
-  console.log("index logIn", user);
+  console.log("index logInAccount", user);
   checkUserState();
 };
-loginForm.addEventListener("submit", (e) => logIn(e));
+loginForm.addEventListener("submit", (e) => logInAccount(e));
 
-// sign-up
+// 회원가입
 const createAccount = async (e) => {
   e.preventDefault();
   const userId = e.target[0].value;
@@ -37,7 +37,7 @@ const createAccount = async (e) => {
 };
 joinForm.addEventListener("submit", (e) => createAccount(e));
 
-// sign-up modal
+// 회원가입 modal
 btnOpenPopup.addEventListener("click", (e) => {
   modal.classList.toggle("show");
   if (modal.classList.contains("show")) {
@@ -53,12 +53,14 @@ modal.addEventListener("click", (e) => {
   }
 });
 
-const logOut = async () => {
-  signOutAccount();
+// 로그아웃
+const logOutAccount = async () => {
+  LogOut();
   loginDiv.style.display = "block";
   loginDiv.querySelectorAll("input").forEach((input) => (input.value = ""));
 };
 
+// 로그인 되어있는 계정 확인
 const checkUserState = async () => {
   const user = await checkCurrentUser();
   const userName = user?.displayName;
@@ -69,7 +71,7 @@ const checkUserState = async () => {
     const logoutBtn = document.createElement("button");
     logoutBtn.innerHTML = "LOG-OUT";
     logoutBtn.addEventListener("click", (e) => {
-      logOut();
+      logOutAccount();
       message.removeChild(greeting);
       message.removeChild(logoutBtn);
     });
