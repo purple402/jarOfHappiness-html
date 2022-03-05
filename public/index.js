@@ -75,8 +75,16 @@ const checkUserState = async () => {
       message.removeChild(greeting);
       message.removeChild(logoutBtn);
     });
+
+    const writingBtn = document.createElement("button");
+    writingBtn.innerHTML = "WRITING";
+    writingBtn.addEventListener("click", (e) => {
+      window.location.href = "./writing.html";
+      console.log("WritingBtn");
+    });
     message.appendChild(greeting);
     message.appendChild(logoutBtn);
+    message.appendChild(writingBtn);
   }
 };
 
