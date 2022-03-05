@@ -6,7 +6,7 @@ import {
   updateProfile,
   signOut,
 } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-auth.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore.js";
+import { getFirestore, collection, addDoc, setDoc, doc } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBKOTaYFavnsmOoQ2SnhwZezPlK6i4OVC8",
@@ -20,7 +20,6 @@ const firebaseConfig = {
 
 const firebaseApp = initializeApp(firebaseConfig);
 const auth = getAuth();
-const db = getFirestore();
 
 // 로그인 기능
 const signIn = async (email, password) => {
@@ -66,6 +65,29 @@ const LogOut = async () => {
   } catch (error) {
     console.log("LogOut", error.message);
   }
+};
+
+const DB = getFirestore();
+const createUserDoc = async (user) => {
+  if (user) {
+    try {
+      // const newUserDocRef = await addDoc(collection(DB, "Happiness"), {});
+      const newUserCollectionRef = collection(DB, "Happiness");
+
+      const id = user.uid;
+      const newUserDoc = {
+        id,
+        createdAt: Date.now(),
+      };
+      // await setDoc(newUserDocRef, newUserDoc);
+      await setDoc(doc(newUserCollectionRef, id), newUserDoc);
+      return id;
+    } catch(error) {
+      console.log(error.message)
+    }
+  } else {
+    return;
+  }
 }
 
-export { signIn, signUp, checkCurrentUser, LogOut };
+export { signIn, signUp, checkCurrentUser, LogOut, createUserDoc };

@@ -33,6 +33,7 @@ const createAccount = async (e) => {
   console.log(userId, userPassword, userName);
   const user = await signUp(userId, userPassword, userName);
   checkUserState();
+  await createUserDoc(user);
 };
 joinForm.addEventListener("submit", (e) => createAccount(e));
 
