@@ -3,6 +3,7 @@ import {
   signUp,
   checkCurrentUser,
   LogOut,
+  createUserDoc,
 } from "./firebase.js";
 
 const body = document.querySelector("body");
@@ -19,7 +20,6 @@ const logInAccount = async (e) => {
   const userId = e.target[0].value;
   const userPassword = e.target[1].value;
   const user = await signIn(userId, userPassword);
-  console.log("index logInAccount", user);
   checkUserState();
 };
 loginForm.addEventListener("submit", (e) => logInAccount(e));
@@ -32,7 +32,6 @@ const createAccount = async (e) => {
   const userName = e.target[2].value;
   console.log(userId, userPassword, userName);
   const user = await signUp(userId, userPassword, userName);
-  console.log("index signUp", user);
   checkUserState();
 };
 joinForm.addEventListener("submit", (e) => createAccount(e));

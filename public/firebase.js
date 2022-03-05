@@ -4,7 +4,7 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   updateProfile,
-  signOut
+  signOut,
 } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-auth.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore.js";
 
@@ -26,7 +26,6 @@ const db = getFirestore();
 const signIn = async (email, password) => {
   try {
     const { user } = await signInWithEmailAndPassword(auth, email, password);
-    console.log("firebase signIn", user);
     return user;
   } catch (error) {
     console.log("firebase signIn", error.code, error.message);
@@ -65,7 +64,7 @@ const LogOut = async () => {
   try {
     signOut(auth);
   } catch (error) {
-    console.log( "LogOut", error.message);
+    console.log("LogOut", error.message);
   }
 }
 
