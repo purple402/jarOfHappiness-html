@@ -68,10 +68,10 @@ const LogOut = async () => {
 };
 
 const DB = getFirestore();
+// 사용자별 문서 생성
 const createUserDoc = async (user) => {
   if (user) {
     try {
-      // const newUserDocRef = await addDoc(collection(DB, "Happiness"), {});
       const newUserCollectionRef = collection(DB, "Happiness");
 
       const id = user.uid;
@@ -79,15 +79,15 @@ const createUserDoc = async (user) => {
         id,
         createdAt: Date.now(),
       };
-      // await setDoc(newUserDocRef, newUserDoc);
       await setDoc(doc(newUserCollectionRef, id), newUserDoc);
       return id;
-    } catch(error) {
-      console.log(error.message)
+    } catch (error) {
+      console.log(error.message);
     }
   } else {
     return;
   }
-}
+};
+
 
 export { signIn, signUp, checkCurrentUser, LogOut, createUserDoc };
