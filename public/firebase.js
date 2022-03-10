@@ -5,6 +5,7 @@ import {
   createUserWithEmailAndPassword,
   updateProfile,
   signOut,
+  onAuthStateChanged,
 } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-auth.js";
 import { getFirestore, collection, addDoc, setDoc, doc } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore.js";
 
@@ -49,13 +50,16 @@ const signUp = async (email, password, username) => {
 };
 
 // 로그인 여부 확인
-const checkCurrentUser = async () => {
-  const user = auth.currentUser;
-  if (user) {
-    return user;
-  } else {
-    return null;
-  }
+const checkCurrentUser = () => {
+  // const user = auth.currentUser;
+  auth.onAuthStateChanged((user) => {
+    if (user) {
+      console.log("checkCurrentUser", user);
+      return user;
+    } else {
+      return null;
+    }
+  });
 };
 
 // 로그아웃 기능
