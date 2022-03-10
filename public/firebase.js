@@ -61,7 +61,7 @@ const checkCurrentUser = async () => {
 // 로그아웃 기능
 const LogOut = async () => {
   try {
-    signOut(auth);
+    await signOut(auth);
   } catch (error) {
     console.log("LogOut", error.message);
   }
