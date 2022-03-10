@@ -1,3 +1,5 @@
+import { createHappiness, checkCurrentUser } from "./firebase.js";
+
 const writingFrom = document.querySelector("#writing_form");
 const textInput = document.querySelector("#writing_text");
 const dateInput = document.querySelector("#writing_date");
@@ -20,11 +22,13 @@ const getToday = () => {
   }`;
 };
 
-const submitHappiness = (e) => {
+const submitHappiness = async (e) => {
   e.preventDefault();
-  console.log("submit");
-  const text = textInput.value;
+  let text = textInput.value;
+  text = text.replace(/(?:\r\n|\r|\n)/g, "<br/>");
   const date = dateInput.value;
+  await createHappiness({ text, date });
+  window.location.href = "./index.html";
 };
 writingFrom.addEventListener("submit", (e) => submitHappiness(e));
 
@@ -33,5 +37,6 @@ const init = () => {
   const today = getToday();
   dateInput.value = today;
   dateInput.max = today;
+  dateInput.min = `${today.substring(0, 4)}-01-01`;
 };
 init();
