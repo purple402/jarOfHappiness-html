@@ -19,8 +19,16 @@ const firebaseConfig = {
   measurementId: "G-9BYWE4E31X",
 };
 
-const firebaseApp = initializeApp(firebaseConfig);
-const auth = getAuth();
+let firebaseApp = null;
+let auth = null;
+const initFirebase = async () => {
+  firebaseApp = await initializeApp(firebaseConfig);
+  auth = await getAuth();
+  const user = checkCurrentUser();
+  return user;
+};
+initFirebase();
+// const auth = getAuth();
 
 // 로그인 기능
 const signIn = async (email, password) => {
