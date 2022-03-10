@@ -7,7 +7,13 @@ import {
   signOut,
   onAuthStateChanged,
 } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-auth.js";
-import { getFirestore, collection, addDoc, setDoc, doc } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore.js";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  setDoc,
+  doc,
+} from "https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBKOTaYFavnsmOoQ2SnhwZezPlK6i4OVC8",
@@ -101,5 +107,24 @@ const createUserDoc = async (user) => {
   }
 };
 
+const createHappiness = async ({ text, date }) => {
+  const year = new Date().getFullYear();
+  const uid = auth.currentUser.uid;
+  console.log("createHappiness", String(year), uid);
+  const yearRef = await addDoc(
+    collection(DB, "Happiness", uid, String(year)),
+    {}
+  );
+  const newHappiness = { text, date, createdAt: Date.now() };
+  await setDoc(yearRef, newHappiness);
+};
 
-export { signIn, signUp, checkCurrentUser, LogOut, createUserDoc };
+export {
+  signIn,
+  signUp,
+  checkCurrentUser,
+  LogOut,
+  createUserDoc,
+  createHappiness,
+  initFirebase,
+};
