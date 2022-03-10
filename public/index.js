@@ -20,7 +20,7 @@ const logInAccount = async (e) => {
   const userId = e.target[0].value;
   const userPassword = e.target[1].value;
   const user = await signIn(userId, userPassword);
-  checkUserState();
+   (user);
 };
 loginForm.addEventListener("submit", (e) => logInAccount(e));
 
@@ -61,8 +61,7 @@ const logOutAccount = async () => {
 };
 
 // 로그인 되어있는 계정 확인
-const checkUserState = async () => {
-  const user = await checkCurrentUser();
+const checkUserState = (user) => {
   const userName = user?.displayName;
   if (user) {
     loginDiv.style.display = "none";
@@ -89,6 +88,5 @@ const checkUserState = async () => {
 };
 
 const init = () => {
-  checkUserState();
 };
 init();
