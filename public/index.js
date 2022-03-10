@@ -4,6 +4,7 @@ import {
   checkCurrentUser,
   LogOut,
   createUserDoc,
+  initFirebase
 } from "./firebase.js";
 
 const body = document.querySelector("body");
@@ -67,6 +68,7 @@ const checkUserState = (user) => {
     loginDiv.style.display = "none";
     const greeting = document.createElement("p");
     greeting.innerHTML = `안녕하세요, ${userName}님! 오늘의 행복을 기록해 봐요!`;
+
     const logoutBtn = document.createElement("button");
     logoutBtn.innerHTML = "LOG-OUT";
     logoutBtn.addEventListener("click", (e) => {
@@ -84,9 +86,13 @@ const checkUserState = (user) => {
     message.appendChild(greeting);
     message.appendChild(logoutBtn);
     message.appendChild(writingBtn);
+    // user 있으면 저장된 것들 불러오기
   }
 };
 
 const init = () => {
+  // 로그인한 아이디가 안불러와짐
+  const user = initFirebase();
+  checkUserState(user);
 };
 init();
