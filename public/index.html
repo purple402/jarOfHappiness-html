@@ -17,26 +17,34 @@
         기쁜 일이나 즐거운 일을 적어 넣어주세요. 한 해 동안 모아둔 행복한 순간을
         연말에 개봉해 꺼내보며 한 해의 기쁨을 떠올려봐요.
       </p>
-      <div id="login_div">
-        <form id="login_form" method="post">
-          <label for="login_id">ID :</label>
-          <input type="email" id="login_id" name="login_id" required />
-          <label for="login_password">password :</label>
-          <input
-            type="password"
-            id="login_password"
-            name="login_password"
-            required
-          />
-          <button>LOG-IN</button>
-        </form>
-        <button class="btn-open-popup">SIGN-UP</button>
+      <div>
+        <button id="btn_open_login_popup">로그인</button>
+        <button id="btn_open_signup_popup">회원가입</button>
+      </div>
+      <!-- 로그인 modal -->
+      <div class="modal" id="login_div">
+        <div class="modal_body">
+          <form id="login_form" method="post">
+            <label for="login_id">ID :</label>
+            <input type="email" id="login_id" name="login_id" required />
+            <label for="login_password">password :</label>
+            <input
+              type="password"
+              id="login_password"
+              name="login_password"
+              required
+            />
+            <button>LOG-IN</button>
+          </form>
+          <button class="btn-open-popup">SIGN-UP</button>
+        </div>
       </div>
 
-      <div class="modal" method="post">
+      <!-- 회원가입 modal -->
+      <div class="modal" id="signup_div">
         <div class="modal_body">
           <h2>회원가입</h2>
-          <form id="join_form">
+          <form id="join_form" method="post">
             <label for="join_id">ID :</label>
             <input type="email" id="join_id" name="join_id" required />
             <label for="password">password :</label>
