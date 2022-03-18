@@ -28,10 +28,9 @@ const firebaseConfig = {
 let firebaseApp = null;
 let auth = null;
 const initFirebase = async () => {
+  console.log("initFirebase");
   firebaseApp = await initializeApp(firebaseConfig);
   auth = await getAuth();
-  const user = checkCurrentUser();
-  return user;
 };
 initFirebase();
 // const auth = getAuth();
@@ -68,12 +67,13 @@ const checkCurrentUser = () => {
   // const user = auth.currentUser;
   auth.onAuthStateChanged((user) => {
     if (user) {
-      console.log("checkCurrentUser", user);
+      console.log("onAuthState", user);
       return user;
     } else {
       return null;
     }
   });
+  console.log("checkCurrentUser");
 };
 
 // 로그아웃 기능
