@@ -1,5 +1,8 @@
+import { getNumberOfThisYear } from "./firebase.js";
+
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
+const dataInfo = document.querySelector(".data p");
 
 const init = () => {
   // ctx.strokeRect(0, 0, 300, 350);
@@ -91,4 +94,14 @@ const createBall = (n) => {
     ctx.fill();
   }
 };
-createBall(3);
+
+const displayData = async () => {
+  const num = await getNumberOfThisYear();
+    if (num == 0) {
+      dataInfo.innerHTML = `첫 번째 행복을 적어보세요!`;
+    } else {
+      dataInfo.innerHTML = `2022년 ${num}개`;
+    }
+    createBall(num);
+}
+export {displayData}
