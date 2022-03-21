@@ -4,7 +4,6 @@ import {
   checkCurrentUser,
   LogOut,
   createUserDoc,
-  initFirebase,
 } from "./firebase.js";
 
 const body = document.querySelector("body");
@@ -17,6 +16,8 @@ const loginModal = document.querySelector("#login_div");
 const signupModal = document.querySelector("#signup_div");
 const loginOpenBtn = document.querySelector("#btn_open_login_popup");
 const signupOpenBtn = document.querySelector("#btn_open_signup_popup");
+const userInfo = document.querySelector("#userInfo")
+const data = document.querySelector(".data")
 
 loginForm.addEventListener("submit", (e) => logInAccount(e));
 joinForm.addEventListener("submit", (e) => createAccount(e));
@@ -88,9 +89,9 @@ const checkUserState = (user) => {
     logoutBtn.innerHTML = "LOG-OUT";
     logoutBtn.addEventListener("click", (e) => {
       logOutAccount();
-      message.removeChild(greeting);
-      message.removeChild(logoutBtn);
-      message.removeChild(writingBtn);
+      userInfo.removeChild(greeting);
+      userInfo.removeChild(logoutBtn);
+      userInfo.removeChild(writingBtn);
     });
 
     const writingBtn = document.createElement("button");
@@ -99,9 +100,9 @@ const checkUserState = (user) => {
       window.location.href = "./writing.html";
       console.log("WritingBtn");
     });
-    message.appendChild(greeting);
-    message.appendChild(logoutBtn);
-    message.appendChild(writingBtn);
+    userInfo.appendChild(greeting);
+    userInfo.appendChild(logoutBtn);
+    userInfo.appendChild(writingBtn);
     // user 있으면 저장된 것들 불러오기
   } else {
     console.log("logout");
@@ -109,8 +110,9 @@ const checkUserState = (user) => {
 };
 
 const init = async () => {
-  // 로그인한 아이디가 안불러와짐
+  // 로그인한 아이디가 늦게불러와짐
   const user = checkCurrentUser();
   checkUserState(user);
+  // data의 css에서 display:none 설정
 };
 init();
