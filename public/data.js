@@ -83,8 +83,9 @@ const createBall = (n) => {
     const coordX = Math.random() * (240 - 60) + 60;
     const coordY = Math.random() * (300 - 65) + 65;
     const color = "#" + Math.floor(Math.random() * 16777215).toString(16);
+    const radius = Math.random() * (20 - 10) + 10;
     ctx.beginPath();
-    ctx.arc(coordX, coordY, 20, 0, 2 * Math.PI);
+    ctx.arc(coordX, coordY, radius, 0, 2 * Math.PI);
     // ctx.stroke();
     ctx.fillStyle = color;
     ctx.fill();
