@@ -13,6 +13,8 @@ import {
   addDoc,
   setDoc,
   doc,
+  query,
+  getDocs,
 } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -27,6 +29,8 @@ const firebaseConfig = {
 
 let firebaseApp = null;
 let auth = null;
+
+// index.js
 const initFirebase = async () => {
   console.log("initFirebase");
   firebaseApp = await initializeApp(firebaseConfig);
@@ -108,13 +112,10 @@ const createUserDoc = async (user) => {
 };
 
 const createHappiness = async ({ text, date }) => {
-  const year = new Date().getFullYear();
+  const year = String(new Date().getFullYear());
   const uid = auth.currentUser.uid;
   console.log("createHappiness", String(year), uid);
-  const yearRef = await addDoc(
-    collection(DB, "Happiness", uid, String(year)),
-    {}
-  );
+  const yearRef = await addDoc(collection(DB, "Happiness", uid, year), {});
   const newHappiness = { text, date, createdAt: Date.now() };
   await setDoc(yearRef, newHappiness);
 };
