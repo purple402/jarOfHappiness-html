@@ -120,6 +120,16 @@ const createHappiness = async ({ text, date }) => {
   await setDoc(yearRef, newHappiness);
 };
 
+// data.js
+const getNumberOfThisYear = async () => {
+  const year = String(new Date().getFullYear());
+  const uid = auth.currentUser.uid;
+  const yearRef = collection(DB, "Happiness", uid, year);
+  const querySnapshot = await getDocs(yearRef);
+  const number = querySnapshot._snapshot.docChanges.length;
+  return number;
+};
+
 export {
   signIn,
   signUp,
@@ -128,4 +138,5 @@ export {
   createUserDoc,
   createHappiness,
   initFirebase,
+  getNumberOfThisYear,
 };
