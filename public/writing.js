@@ -25,10 +25,14 @@ const getToday = () => {
 const submitHappiness = async (e) => {
   e.preventDefault();
   let text = textInput.value;
-  text = text.replace(/(?:\r\n|\r|\n)/g, "<br/>");
-  const date = dateInput.value;
-  await createHappiness({ text, date });
-  window.location.href = "./index.html";
+  if (!text) {
+    alert("내용을 적어주세요!")
+  } else {
+    text = text.replace(/(?:\r\n|\r|\n)/g, "<br/>");
+    const date = dateInput.value;
+    await createHappiness({ text, date });
+    window.location.href = "./index.html";
+  }
 };
 writingFrom.addEventListener("submit", (e) => submitHappiness(e));
 
