@@ -94,3 +94,11 @@ form {
   width: 100%;
   height: 80px;
 }
+
+#data {
+  display: none;
+}
+
+#data.show {
+  display: block;
+}
