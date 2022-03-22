@@ -59,5 +59,10 @@ const displayBottle = async () => {
   createBall(num);
 };
 
+const hideBottle = () => {
+  ctx.fillStyle = "white";
+  ctx.fillRect(0, 0, 300, 350);
+  dataDiv.classList.remove('show');
 }
-export {displayData}
+
+export { displayBottle, hideBottle };
