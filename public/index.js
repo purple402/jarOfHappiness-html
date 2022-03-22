@@ -16,8 +16,7 @@ const loginModal = document.querySelector("#login_div");
 const signupModal = document.querySelector("#signup_div");
 const loginOpenBtn = document.querySelector("#btn_open_login_popup");
 const signupOpenBtn = document.querySelector("#btn_open_signup_popup");
-const userInfo = document.querySelector("#userInfo")
-const data = document.querySelector(".data")
+const userInfo = document.querySelector("#userInfo");
 
 loginForm.addEventListener("submit", (e) => logInAccount(e));
 joinForm.addEventListener("submit", (e) => createAccount(e));
@@ -86,7 +85,7 @@ const checkUserState = (user) => {
     greeting.innerHTML = `안녕하세요, ${userName}님! 오늘의 행복을 기록해 봐요!`;
 
     const logoutBtn = document.createElement("button");
-    logoutBtn.innerHTML = "LOG-OUT";
+    logoutBtn.innerHTML = "로그아웃";
     logoutBtn.addEventListener("click", (e) => {
       logOutAccount();
       userInfo.removeChild(greeting);
@@ -95,17 +94,17 @@ const checkUserState = (user) => {
     });
 
     const writingBtn = document.createElement("button");
-    writingBtn.innerHTML = "WRITING";
+    writingBtn.innerHTML = "작성";
     writingBtn.addEventListener("click", (e) => {
       window.location.href = "./writing.html";
       console.log("WritingBtn");
     });
     userInfo.appendChild(greeting);
-    userInfo.appendChild(logoutBtn);
     userInfo.appendChild(writingBtn);
+    userInfo.appendChild(logoutBtn);
     // user 있으면 저장된 것들 불러오기
   } else {
-    console.log("logout");
+    console.log("로그인된 계정 없음");
   }
 };
 
