@@ -5,7 +5,7 @@ const ctx = canvas.getContext("2d");
 const dataDiv = document.querySelector("#data");
 const dataInfo = document.querySelector("#data p");
 
-const init = () => {
+const drawBottle = () => {
   // ctx.strokeRect(0, 0, 300, 350);
   // canvas.addEventListener("click", (e) => console.log(e.offsetX, e.offsetY));
 
@@ -30,56 +30,6 @@ const init = () => {
   ctx.stroke();
   ctx.clip();
 };
-init();
-
-const drawCanvas = () => {
-  // 캔버스에 그림그리기
-  canvas.addEventListener("mousemove", function (e) {
-    mouseMove(e);
-  });
-  canvas.addEventListener("mousedown", function (e) {
-    mouseDown(e);
-  });
-  canvas.addEventListener("mouseup", function (e) {
-    mouseUp(e);
-  });
-  canvas.addEventListener("mouseout", function (e) {
-    mouseOut(e);
-  });
-
-  let startX = 0;
-  let startY = 0;
-  let drawing = false;
-  ctx.lineWidth = 4;
-  ctx.strokeStyle = "blue";
-  function draw(curX, curY) {
-    ctx.beginPath();
-    ctx.moveTo(startX, startY);
-    ctx.lineTo(curX, curY);
-    ctx.stroke();
-  }
-  function mouseDown(e) {
-    startX = e.offsetX;
-    startY = e.offsetY;
-    drawing = true;
-  }
-
-  function mouseMove(e) {
-    if (!drawing) return;
-    let curX = e.offsetX;
-    let curY = e.offsetY;
-    draw(curX, curY);
-    startX = curX;
-    startY = curY;
-  }
-  function mouseUp(e) {
-    drawing = false;
-  }
-
-  function mouseOut(e) {
-    drawing = false;
-  }
-};
 
 // 공 만들기
 const createBall = (n) => {
@@ -96,13 +46,18 @@ const createBall = (n) => {
   }
 };
 
-const displayData = async () => {
+// 사용자 정보 표시하기
+const displayBottle = async () => {
+  drawBottle();
+  dataDiv.classList.add("show");
   const num = await getNumberOfThisYear();
-    if (num == 0) {
-      dataInfo.innerHTML = `첫 번째 행복을 적어보세요!`;
-    } else {
-      dataInfo.innerHTML = `2022년 ${num}개`;
-    }
-    createBall(num);
+  if (num == 0) {
+    dataInfo.innerHTML = `첫 번째 행복을 적어보세요!`;
+  } else {
+    dataInfo.innerHTML = `2022년에는 ${num}개의 행복을 저장했어요`;
+  }
+  createBall(num);
+};
+
 }
 export {displayData}
