@@ -5,6 +5,7 @@ import {
   LogOut,
   createUserDoc,
 } from "./firebase.js";
+import { displayBottle, hideBottle } from "./data.js";
 
 const body = document.querySelector("body");
 const message = document.querySelector("#message");
@@ -74,6 +75,7 @@ const logOutAccount = async () => {
   btnDiv.style.display = "block";
   loginForm.querySelectorAll("input").forEach((input) => (input.value = ""));
   checkUserState(null);
+  hideBottle();
 };
 
 // 로그인 되어있는 계정 확인
@@ -103,6 +105,7 @@ const checkUserState = (user) => {
     userInfo.appendChild(writingBtn);
     userInfo.appendChild(logoutBtn);
     // user 있으면 저장된 것들 불러오기
+    displayBottle();
   } else {
     console.log("로그인된 계정 없음");
   }
