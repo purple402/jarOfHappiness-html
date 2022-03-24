@@ -29,15 +29,16 @@ const firebaseConfig = {
 
 let firebaseApp = null;
 let auth = null;
+let DB = null;
 
 // index.js
 const initFirebase = async () => {
   console.log("initFirebase");
   firebaseApp = await initializeApp(firebaseConfig);
   auth = await getAuth();
+  DB = getFirestore();
 };
-initFirebase();
-// const auth = getAuth();
+// initFirebase();
 
 // 로그인 기능
 const signIn = async (email, password) => {
@@ -67,17 +68,23 @@ const signUp = async (email, password, username) => {
 };
 
 // 로그인 여부 확인
-const checkCurrentUser = () => {
+const checkCurrentUser = async () => {
   // const user = auth.currentUser;
-  auth.onAuthStateChanged((user) => {
-    if (user) {
-      console.log("onAuthState", user);
-      return user;
-    } else {
-      return null;
-    }
-  });
-  console.log("checkCurrentUser");
+  // auth.onAuthStateChanged((user) => {
+  //   if (user) {
+  //     console.log("onAuthState", user);
+  //     return user;
+  //   } else {
+  //     return null;
+  //   }
+  // });
+  // console.log("checkCurrentUser");
+  if (currentUser) {
+    console.log("checkCurrentUser", currentUser);
+    return currentUser;
+  } else {
+    return null;
+  }
 };
 
 // 로그아웃 기능
@@ -89,7 +96,7 @@ const LogOut = async () => {
   }
 };
 
-const DB = getFirestore();
+// const DB = getFirestore();
 // 사용자별 문서 생성
 const createUserDoc = async (user) => {
   if (user) {
@@ -112,9 +119,9 @@ const createUserDoc = async (user) => {
 };
 
 const createHappiness = async ({ text, date }) => {
-  const year = String(new Date().getFullYear());
+  const year = date.substring(0, 4)
+  // const year = String(new Date().getFullYear());
   const uid = auth.currentUser.uid;
-  console.log("createHappiness", String(year), uid);
   const yearRef = await addDoc(collection(DB, "Happiness", uid, year), {});
   const newHappiness = { text, date, createdAt: Date.now() };
   await setDoc(yearRef, newHappiness);

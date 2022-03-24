@@ -4,6 +4,7 @@ import {
   checkCurrentUser,
   LogOut,
   createUserDoc,
+  initFirebase
 } from "./firebase.js";
 import { displayBottle, hideBottle } from "./data.js";
 
@@ -112,9 +113,7 @@ const checkUserState = (user) => {
 };
 
 const init = async () => {
-  // 로그인한 아이디가 늦게불러와짐
-  const user = checkCurrentUser();
-  checkUserState(user);
-  // data의 css에서 display:none 설정
+  // const user = checkCurrentUser();
+  initFirebase();
 };
 init();
